@@ -474,9 +474,9 @@ class COCO_dataset_generator(object):
                     self.r_x = event.xdata
                     self.r_y = event.ydata
             else:
-                print (self.edit_poly)
                 if self.edit_poly:
                     self.onkeyboard(None)
+                
                 if len(self.points)>5:
                     self.right_click=True
                     self.fig.canvas.mpl_disconnect(self.click_id)
@@ -630,7 +630,10 @@ class COCO_dataset_generator(object):
             
             if self.p:
                 self.p.remove()
+            
             self.circles = []
+            self.edit_poly = False
+            self.insert_pt_ptr = None
 
 if __name__=='__main__':
 
