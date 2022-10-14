@@ -380,9 +380,9 @@ class COCO_dataset_generator(object):
             #                      lines[closest_line_idx][int(closest_pt_idx!=1)][1]], 'b--')
             #self.lines = self.lines[:closest_line_idx] + [line1, line2] + self.lines[closest_line_idx:]
             
-            print (poly)
+            #print (poly)
             poly = poly if np.equal(poly[-1], (self.insert_pt_ptr["last_pt"],)).all() else np.append(poly, (self.insert_pt_ptr["last_pt"],), axis=0)
-            print (poly)
+            #print (poly)
 
             self.points = self.polygon_to_points(poly)
             
@@ -394,7 +394,7 @@ class COCO_dataset_generator(object):
             #self.p.remove()
             self.p = PatchCollection([Polygon(self.points_to_polygon(), closed=True)], facecolor='purple', linewidths=0, alpha=0.1)
             self.ax.add_collection(self.p)
-            
+
         self.fig.canvas.draw()
 
     def next(self, event):
@@ -627,7 +627,10 @@ class COCO_dataset_generator(object):
             self.submit_p = PatchCollection(self.polys, cmap=matplotlib.cm.jet, alpha=0.4)
             self.ax.add_collection(self.submit_p)
             self.points = []
-            print ('empty')
+            
+            if self.p:
+                self.p.remove()
+            self.circles = []
 
 if __name__=='__main__':
 
