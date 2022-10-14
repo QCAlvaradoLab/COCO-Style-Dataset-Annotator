@@ -476,7 +476,6 @@ class COCO_dataset_generator(object):
             else:
                 print (self.edit_poly)
                 if self.edit_poly:
-                    print (event); exit()
                     self.onkeyboard(None)
                 if len(self.points)>5:
                     self.right_click=True
@@ -492,8 +491,12 @@ class COCO_dataset_generator(object):
             self.fig.canvas.draw()
 
             if len(self.points)>4:
-                if self.prev:
-                    self.prev.remove()
+                if not self.prev is None:
+                    try:
+                        self.prev.remove()
+                    except Exception:
+                        pass
+
                 self.p = PatchCollection([Polygon(self.points_to_polygon(), closed=True)], facecolor='red', linewidths=0, alpha=0.4)
                 self.ax.add_collection(self.p)
                 self.prev = self.p
@@ -624,6 +627,7 @@ class COCO_dataset_generator(object):
             self.submit_p = PatchCollection(self.polys, cmap=matplotlib.cm.jet, alpha=0.4)
             self.ax.add_collection(self.submit_p)
             self.points = []
+            print ('empty')
 
 if __name__=='__main__':
 
