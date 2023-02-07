@@ -326,7 +326,8 @@ class COCO_dataset_generator(object):
             if self.insert_pt_ptr == None:
                 
                 last_pt = poly[-1]
-                poly = poly[:-1] # remove last pt as first pt to use advanced robotic API capabilities 
+                poly = poly[:-1] # remove last pt as first pt to use advanced robotic API capabilities (human deep learner downsides)
+                # code reading redo prompts - understanding the same code over and over again! virtual understanding repetition benefits?
             
                 closest_line_idx = np.argmin(dists)
                 closest_pt_idx = np.argmin(list(map(lambda pt: dist_fn(pt), 
